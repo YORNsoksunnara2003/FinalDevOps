@@ -1,0 +1,55 @@
+# FINAL_DEV/terrain-booking-system/kubernetes/laravel-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: terrain-booking-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: terrain-booking
+  template:
+    metadata:
+      labels:
+        app: terrain-booking
+    spec:
+      containers:
+        # PHP + NGINX Container
+        - name: laravel-app
+          image: your-dockerhub-username/laravel-app:latest  # From Step 2
+          ports:
+            - containerPort: 8080  # Laravel
+            - containerPort: 22    # SSH (if needed)
+          volumeMounts:
+            - name: app-code
+              mountPath: /var/www/html
+          envFrom:
+            - configMapRef:
+                name: laravel-config
+            - secretRef:
+                name: laravel-secrets
+
+        # MySQL Container
+        - name: mysql
+          image: mysql:8.0
+          env:
+            - name: MYSQL_DATABASE
+              value: "terrain_booking_db"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: laravel-secrets
+                  key: db-password
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+
+      volumes:
+        - name: app-code
+          hostPath:
+            path: /absolute/path/to/FINAL_DEV/terrain-booking-system  # Update this!
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: mysql-pvc

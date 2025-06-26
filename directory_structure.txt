@@ -1,0 +1,43 @@
+FINAL_DEV  
+- FINAL_DEV / terrain-booking-system / kubernetes  
+  - laravel-configmap.yaml  
+  - laravel-deployment.yaml  
+  - laravel-secrets.yaml  
+  - mysql-pvc.yaml  
+  - service.yaml  
+
+- terrain-booking-system  
+  - app  
+  - bootstrap  
+  - config  
+  - database  
+  - factories  
+  - migrations  
+  - seeders  
+  - .gitignore  
+  - database.sqlite  
+
+- Docker  
+  - nginx  
+  - default.conf  
+  - Dockerfile  
+  - node_modules  
+  - public  
+  - resources  
+  - routes  
+  - storage  
+  - tests  
+  - vendor  
+  - .editorconfig  
+  - .env  
+  - .env.example  
+  - .gitattributes  
+  - .gitignore  
+  - artisan  
+  - composer.json  
+  - composer.lock  
+  - package-lock.json  
+  - package.json  
+  - phpunit.xml  
+  - README.md  
+  - vite.config.js  

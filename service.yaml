@@ -1,0 +1,13 @@
+# FINAL_DEV/terrain-booking-system/kubernetes/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: terrain-booking-service
+spec:
+  selector:
+    app: terrain-booking
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer  # Or NodePort for local testing
